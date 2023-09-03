@@ -1,7 +1,7 @@
 from django.db import models
 
 class CartItem(models.Model):
-    user = models.IntegerField()
+    user = models.CharField(max_length=100)
     card = models.IntegerField()
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
