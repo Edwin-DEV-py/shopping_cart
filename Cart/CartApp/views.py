@@ -13,9 +13,10 @@ class CartItemAPIView(APIView):
     
     def post(self,request):
         user_id = request.data.get('user')  #Obtener el ID de usuario enviado desde Node.js
-        cart_id = request.data.get('cart_id') #Obtener el ID de la carta enviado desde Node.js
+        id_carta = request.data.get('id_carta') #Obtener el ID de la carta enviado desde Node.js
         data = {
             'user': user_id,
+            'id_carta':id_carta,
             'title': request.data.get('title', ''),
             'description': request.data.get('description', '')
         }
