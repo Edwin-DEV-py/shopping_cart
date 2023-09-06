@@ -30,7 +30,22 @@ class CartItemAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#anadir mas cantidad de la misma carta
+@api_view(['POST'])
+def AddMoreCard(request):
+    #obtener datos desde el front
+    user_id = request.data.get('user')
+    id_carta = request.data.get('id_carta')
     
+    #verificar el item en el carrito
+    card = get_object_or_404(CartItem,id_carta=id_carta)
+    
+    #validar que el item si sea del usuario y exista en la abse de datos
+    if card.user == user_id and card.id_carta == id_carta:
+        card.quantity += 1
+        card.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 #remover cantidad de la misma carta
 @api_view(['POST'])
