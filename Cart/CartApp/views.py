@@ -25,11 +25,17 @@ class CartItemAPIView(APIView):
             'price':price
         }
         
+        
+        
         try:
-            item = CartItem.objects.get(id_carta=id_carta,user_id=user_id)
+            #agregar mas cantidad a la misma carta si ya existe
+            item = CartItem.objects.get(id_carta=id_carta,user=user_id)
             item.quantity +=1
             item.save()
+            serializer = CartItemSerializer(item)
+            return Response(serializer.data)
         except CartItem.DoesNotExist:
+            #crear la carta en el carrito sino existe
             serializer = CartItemSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
