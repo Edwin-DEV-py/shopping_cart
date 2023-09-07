@@ -25,10 +25,15 @@ class CartItemAPIView(APIView):
             'price':price
         }
         
-        serializer = CartItemSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            item = CartItem.objects.get(id_carta=id_carta,user_id=user_id)
+            item.quantity +=1
+            item.save()
+        except CartItem.DoesNotExist:
+            serializer = CartItemSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #anadir mas cantidad de la misma carta
