@@ -6,14 +6,37 @@ from .models import CartItem
 from .serializers import CartItemSerializer
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
+import requests
 
 #agregar y ver items del carrito
 class CartItemAPIView(APIView):
     def get(self, request):
         user_id = request.data.get('user') 
+        
+        response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+        cards = response.json()
+        
+        #filtrar por usuario y serializar datos
         items = CartItem.objects.filter(user=user_id)
-        serializer = CartItemSerializer(items, many=True)
-        return Response(serializer.data)
+        cart_item_serializer = CartItemSerializer(items, many=True)
+        cart_item_data = cart_item_serializer.data  #datos serializados
+
+        #guardamos los datos de las cartas
+        response_data = []
+        for item_data in cart_item_data:
+            id_carta = item_data["id_carta"]
+            quantity = item_data["quantity"]
+            
+            for card in cards:
+                if card['_id'] == id_carta:
+                    response_data.append({
+                        "user": user_id,
+                        "id_carta": id_carta,
+                        "quantity": quantity,
+                        **card
+                    })
+            
+        return Response(response_data)
     
     def post(self,request):
         user_id = request.data.get('user')  #Obtener el ID de usuario enviado desde Node.js
