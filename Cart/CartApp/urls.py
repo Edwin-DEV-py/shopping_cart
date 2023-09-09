@@ -3,6 +3,7 @@ from .views import CartItemAPIView,RemoveSameItem,DeleteCard
 
 urlpatterns = [
     path('cart/<str:user_id>/', CartItemAPIView.as_view(),name='carrito'),
+    path('cartshop/', CartItemAPIView.as_view(),name='carrito_comprar'),
     path('cart/remove/',RemoveSameItem,name='removecard'),
     path('cart/delete/',DeleteCard,name='deletecard'),
 ]
