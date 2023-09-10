@@ -25,6 +25,8 @@ class CartItemAPIView(APIView):
         response_data = []
         for item_data in cart_item_data:
             id_carta = item_data["id_carta"]
+            nombre_carta = item_data["nombre_carta"]
+            price = item_data['price']
             quantity = item_data["quantity"]
             
             for card in cards:
@@ -32,6 +34,8 @@ class CartItemAPIView(APIView):
                     response_data.append({
                         "user": user_id,
                         "id_carta": id_carta,
+                        "nombre_carta":nombre_carta,
+                        "price":price,
                         "quantity": quantity,
                         **card
                     })
@@ -42,8 +46,10 @@ class CartItemAPIView(APIView):
         user_id = request.data.get('user')  #Obtener el ID de usuario enviado desde Node.js
         id_carta = request.data.get('id_carta') #Obtener el ID de la carta enviado desde Node.js
         price = request.data.get('price')
+        nombre_carta = request.data.get('nombre_carta')
         data = {
             'user': user_id,
+            'nombre_carta':nombre_carta,
             'id_carta':id_carta,
             'price':price
         }
