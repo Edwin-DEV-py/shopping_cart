@@ -10,8 +10,8 @@ import requests
 
 #agregar y ver items del carrito
 class CartItemAPIView(APIView):
-    def get(self, request, user_id):
-        #user_id = request.data.get('user') 
+    def get(self, request):
+        user_id = request.data.get('user') 
         
         response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
         cards = response.json()
