@@ -102,10 +102,12 @@ def RemoveSameItem(request):
         if card.quantity > 1:
             card.quantity -= 1
             card.save()
-            return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             card.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        cart_items = CartItem.objects.filter(user=user_id)
+        updated_cart_serializer = CartItemSerializer(cart_items, many=True)
+        updated_cart_data = updated_cart_serializer.data
+        return Response(updated_cart_data, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({"detail": "No tienes permiso para eliminar este elemento del carrito."}, status=status.HTTP_403_FORBIDDEN)
     
@@ -123,7 +125,9 @@ def DeleteCard(request):
     #validar que el item si sea del usuario
     if card.user == user_id:
         card.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    else:
-        return Response({"detail": "No tienes permiso para eliminar este elemento del carrito."}, status=status.HTTP_403_FORBIDDEN)
+    cart_items = CartItem.objects.filter(user=user_id)
+    updated_cart_serializer = CartItemSerializer(cart_items, many=True)
+    updated_cart_data = updated_cart_serializer.data
+    return Response(updated_cart_data, status=status.HTTP_204_NO_CONTENT)
+
     
