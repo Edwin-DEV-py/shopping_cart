@@ -13,8 +13,8 @@ class CartItemAPIView(APIView):
     def get(self, request):
         user_id = request.data.get('user') 
         
-        response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
-        #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+        #response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
+        response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
         cards = response.json()
         
         #filtrar por usuario y serializar datos

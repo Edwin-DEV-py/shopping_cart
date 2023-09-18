@@ -9,7 +9,7 @@ import pika, json
 from CartApp.models import CartItem
 
 #conectar con cloudAMQP
-params = pika.URLParameters('amqps://rlvgzuul:IR8L9U8f_vzjLAF0P4gtt9ALoMC4Q8W7@jaragua.lmq.cloudamqp.com/rlvgzuul')
+params = pika.URLParameters('amqps://fjonsldu:WYViCxnki3fHD6oBcv8tIO3iAZ8T24Yq@jackal.rmq.cloudamqp.com/fjonsldu')
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 print('conectado')
@@ -26,7 +26,7 @@ def callback(ch, method,properties, body):
     
     if properties.content_type == 'vaciar_carrito':
         user = data
-        nombre = CartItem.objects.filter(user=user).delete()
+        CartItem.objects.filter(user=user).delete()
         
         
 channel.basic_consume(queue='carrito', on_message_callback=callback, auto_ack=True)
@@ -35,7 +35,4 @@ print('consumiendo')
 
 
 channel.start_consuming()
-
-channel.close()
-        
             
