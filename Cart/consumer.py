@@ -9,7 +9,7 @@ import pika, json
 from CartApp.models import CartItem
 
 #conectar con cloudAMQP
-params = pika.URLParameters('amqps://fjonsldu:WYViCxnki3fHD6oBcv8tIO3iAZ8T24Yq@jackal.rmq.cloudamqp.com/fjonsldu')
+params = pika.URLParameters('amqps://pimhdfyz:v79_lwTMTMNkSRg3qgGxbQC1nD2y6ivM@jaragua.lmq.cloudamqp.com/pimhdfyz')
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 print('conectado')
