@@ -9,16 +9,3 @@ services:
       - 8001:8001
     volumes:
       - .:/app
-    networks:
-      - mynetwork
-
-  queue:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: 'python consumer.py'
-    networks:
-      - mynetwork
-
-networks:
-  mynetwork:
