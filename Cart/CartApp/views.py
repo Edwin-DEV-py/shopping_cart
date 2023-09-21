@@ -131,4 +131,14 @@ def DeleteCard(request):
     updated_cart_data = updated_cart_serializer.data
     return Response(updated_cart_data, status=status.HTTP_204_NO_CONTENT)
 
+
+@api_view(['POST'])
+def VaciarCarrito(request):
+    user = request.data.get('user')
+    try:
+        CartItem.objects.filter(user=user).delete()
+        return Response({'Eliminado:':'Carrito eliminado'})
+    except:
+        return Response({'Error':'Error al vaciar carrito'})
+
     
