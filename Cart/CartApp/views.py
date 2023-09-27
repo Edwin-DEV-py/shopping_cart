@@ -23,25 +23,25 @@ class CartItemAPIView(APIView):
         cart_item_data = cart_item_serializer.data  #datos serializados
 
         #guardamos los datos de las cartas
-        response_data = []
-        for item_data in cart_item_data:
-            id_carta = item_data["id_carta"]
-            nombre_carta = item_data["nombre_carta"]
-            price = item_data['price']
-            quantity = item_data["quantity"]
+        #response_data = []
+        #for item_data in cart_item_data:
+        #    id_carta = item_data["id_carta"]
+        #    nombre_carta = item_data["nombre_carta"]
+        #    price = item_data['price']
+        #    quantity = item_data["quantity"]
+        #    
+        #    for card in cards:
+        #        if card['Id'] == id_carta:
+        #            response_data.append({
+        #                "user": user_id,
+        #                "id_carta": id_carta,
+        #                "nombre_carta":nombre_carta,
+        #                "price":price,
+        #                "quantity": quantity,
+        #                **card
+        #            })
             
-            for card in cards:
-                if card['Id'] == id_carta:
-                    response_data.append({
-                        "user": user_id,
-                        "id_carta": id_carta,
-                        "nombre_carta":nombre_carta,
-                        "price":price,
-                        "quantity": quantity,
-                        **card
-                    })
-            
-        return Response(response_data)
+        return Response(cart_item_data)
     
     def post(self,request):
         user_id = request.data.get('user')  #Obtener el ID de usuario enviado desde Node.js
