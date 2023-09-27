@@ -13,7 +13,7 @@ class CartItemAPIView(APIView):
     def get(self, request):
         user_id = request.data.get('user') 
         
-        response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+        response = requests.get('https://cards.thenexusbattles2.cloud/api/heroes/650f38ee7aaeb67f7dfc712e')
         #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
         cards = response.json()
         
@@ -31,7 +31,7 @@ class CartItemAPIView(APIView):
             quantity = item_data["quantity"]
             
             for card in cards:
-                if card['_id'] == id_carta:
+                if card['Id'] == id_carta:
                     response_data.append({
                         "user": user_id,
                         "id_carta": id_carta,
