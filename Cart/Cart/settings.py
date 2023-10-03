@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nsv7#2&4x0s*isqi*+7_&-&b#*iv4u-hyyx62#znb!74rkr1^-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','20.25.34.123','https://store.thenexusbattles2.cloud/carrito/','store.thenexusbattles2.cloud/carrito/','store.thenexusbattles2.cloud']
+ALLOWED_HOSTS = ['*','20.25.34.123','https://api.thenexusbattles2.cloud/carrito/','api.thenexusbattles2.cloud/carrito/','api.thenexusbattles2.cloud']
 
 
 # Application definition
