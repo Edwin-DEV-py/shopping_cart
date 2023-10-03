@@ -31,7 +31,7 @@ class CartItemAPIView(APIView):
             quantity = item_data["quantity"]
             
             for card in cards:
-                if card['Id'] == id_carta:
+                if card['_id'] == id_carta:
                     response_data.append({
                         "user": user_id,
                         "id_carta": id_carta,
